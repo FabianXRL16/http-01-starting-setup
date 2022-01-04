@@ -8,10 +8,11 @@
         >
       </div>
       <p v-if="isLoading">Loading ...</p>
+      <p v-else-if="!isLoading && error">{{ error }}</p>
       <p v-else-if="!isLoading && (!results || results.length === 0)">
         No stored experiences found.
       </p>
-      <ul v-else-if="!isLoading && results && results.length > 0">
+      <ul v-else>
         <survey-result
           v-for="result in results"
           :key="result.id"
@@ -34,6 +35,7 @@ export default {
     return {
       results: [],
       isLoading: false,
+      error: null,
     };
   },
   mounted() {
@@ -61,6 +63,11 @@ export default {
             });
           }
           this.results = results;
+        })
+        .catch((error) => {
+          console.log(error);
+          this.error = 'Failed to fecth data - please try again later.';
+          this.isLoading = false;
         });
     },
   },

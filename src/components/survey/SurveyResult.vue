@@ -21,7 +21,7 @@ export default {
 <style scoped>
 li {
   margin: 1rem 0;
-  border: 1px solid #ccc;
+  border: 1px solid rgb(197, 197, 197);
   padding: 1rem;
 }
 
